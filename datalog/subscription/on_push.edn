@@ -1,0 +1,12 @@
+[:find
+ (pull
+   ?commit
+   [:git.commit/sha
+    :git.commit/message
+    {:git.commit/repo
+     [:git.repo/source-id
+      {:git.repo/org [:git.provider/url]}]}])
+ :in $ $before-db % ?ctx
+ :where
+ (push-tx ?ctx ?commit ?ref)]
+
